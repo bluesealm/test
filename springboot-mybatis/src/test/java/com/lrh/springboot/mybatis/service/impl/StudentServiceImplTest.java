@@ -30,8 +30,6 @@ public class StudentServiceImplTest extends BaseJunitTest {
 
         for (int i = 0; i <100 ; i++) {
             Student student=new Student();
-
-//            xxx
             student.setSName("name"+i);
             student.setIAge(18+i);
             student.setSPwd("pwd"+i);
