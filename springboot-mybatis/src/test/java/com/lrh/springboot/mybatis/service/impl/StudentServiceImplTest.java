@@ -36,6 +36,8 @@ public class StudentServiceImplTest extends BaseJunitTest {
             student.setIAge(18+i);
             student.setSPwd("pwd"+i);
             studentList.add(student);
+
+            //dddddddddd
         }
         studentService.batchInsertAllColumn(studentList);
 //        void insertSelective(T t);
