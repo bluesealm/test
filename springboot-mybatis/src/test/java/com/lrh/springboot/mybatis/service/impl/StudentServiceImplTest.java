@@ -37,7 +37,6 @@ public class StudentServiceImplTest extends BaseJunitTest {
 
             //dddddddddd
         }
-        studentService.batchInsertAllColumn(studentList);
 //        void insertSelective(T t);
 //
 //        void batchInsertAllColumn(List<T> t);
