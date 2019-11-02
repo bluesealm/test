@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lrh.springboot.mybatis.mapper.StudentCopyMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lrh.springboot.mybatis.entity.StudentCopy">
+            <id column="i_id" property="iId"/>
+            <result column="s_pwd2" property="sPwd2"/>
+            <result column="s_name2" property="sName2"/>
+            <result column="i_age2" property="iAge2"/>
+    </resultMap>
+
+    <sql id="Table_Name">
+    student_copy
+    </sql>
+
+    <sql id="Base_Column_List">
+            i_id AS iId,
+            s_pwd2 AS sPwd2,
+            s_name2 AS sName2,
+            i_age2 AS iAge2
+    </sql>
+
+    <sql id="Base_Column_Condition">
+        WHERE 1=1
+            <if test="iId !=null">and i_id=#{iId} </if>
+            <if test="sPwd2 !=null">and s_pwd2=#{sPwd2} </if>
+            <if test="sName2 !=null">and s_name2=#{sName2} </if>
+            <if test="iAge2 !=null">and i_age2=#{iAge2} </if>
+    </sql>
+
+    <insert id="insertSelective" parameterType="com.lrh.springboot.mybatis.entity.StudentCopy"  keyProperty="iId" useGeneratedKeys="true"  >
+         insert into <include refid="Table_Name"/>
+        <trim prefix="(" suffixOverrides="," suffix=")">
+                <if test="iId !=null">i_id,</if>
+                <if test="sPwd2 !=null">s_pwd2,</if>
+                <if test="sName2 !=null">s_name2,</if>
+                <if test="iAge2 !=null">i_age2,</if>
+        </trim>
+         values
+        <trim prefix="(" suffixOverrides="," suffix=")">
+                <if test="iId !=null">#{iId},</if>
+                <if test="sPwd2 !=null">#{sPwd2},</if>
+                <if test="sName2 !=null">#{sName2},</if>
+                <if test="iAge2 !=null">#{iAge2},</if>
+        </trim>
+    </insert>
+
+    <insert id="batchInsertAllColumn" parameterType="java.util.List"  keyProperty="iId" useGeneratedKeys="true" >
+        insert into <include refid="Table_Name"/>
+        <trim prefix="(" suffixOverrides="," suffix=")">
+                i_id,
+                s_pwd2,
+                s_name2,
+                i_age2,
+        </trim>
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            <trim prefix="(" suffixOverrides="," suffix=")">
+                 #{item.iId},
+                 #{item.sPwd2},
+                 #{item.sName2},
+                 #{item.iAge2},
+            </trim>
+        </foreach>
+    </insert>
+
+    <update id="updateSelectiveById" parameterType="com.lrh.springboot.mybatis.entity.StudentCopy" >
+        update <include refid="Table_Name"/>
+        <trim prefix="set" suffixOverrides="," >
+                <if test="iId !=null">i_id=#{iId},</if>
+                <if test="sPwd2 !=null">s_pwd2=#{sPwd2},</if>
+                <if test="sName2 !=null">s_name2=#{sName2},</if>
+                <if test="iAge2 !=null">i_age2=#{iAge2},</if>
+        </trim>
+        where
+        i_id=#{iId}
+    </update>
+
+    <update id="batchUpdateSelectiveById" parameterType="list" >
+        <foreach collection="list" item="item" index="index" separator=";">
+            update <include refid="Table_Name"/>
+             <trim prefix="set" suffixOverrides="," suffix="">
+                <if test="item.iId !=null">i_id=#{item.iId},</if>
+                <if test="item.sPwd2 !=null">s_pwd2=#{item.sPwd2},</if>
+                <if test="item.sName2 !=null">s_name2=#{item.sName2},</if>
+                <if test="item.iAge2 !=null">i_age2=#{item.iAge2},</if>
+             </trim>
+             where
+             i_id=#{item.iId}
+        </foreach>
+    </update>
+
+     <delete id="deleteById">
+         delete from <include refid="Table_Name"/> where i_id= #{iId}
+     </delete>
+
+    <delete id="deleteByColumn">
+        delete from <include refid="Table_Name"/> <include refid="Base_Column_Condition"/>
+    </delete>
+
+    <select id="selectById"  resultMap="BaseResultMap">
+        select * from <include refid="Table_Name"/>  where i_id= #{iId}
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        select * from <include refid="Table_Name"/>  <include refid="Base_Column_Condition"/>
+    </select>
+    <!-- 数据库常规操作 end  -->
+    <!-- 数据库自定义 end  -->
+</mapper>
