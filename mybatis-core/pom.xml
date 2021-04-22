@@ -13,7 +13,7 @@
     
     <properties>
         <!-- mybatis版本号 -->
-        <mybatis.version>3.5.2</mybatis.version>
+        <mybatis.version>3.5.6</mybatis.version>
         <mybatis.spring>2.0.2</mybatis.spring>
         <spring.context>5.1.8.RELEASE</spring.context>
         <spring.jdbc>5.1.8.RELEASE</spring.jdbc>
